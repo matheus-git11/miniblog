@@ -42,6 +42,7 @@ export const useAuthentication = () => {
       await updateProfile(user, {
         displayName: data.displayName,
       });
+
       setLoading(false);
       return user;
     } catch (error) {
@@ -57,7 +58,7 @@ export const useAuthentication = () => {
       } else {
         systemErrorMessage = "Ocorreu um erro , por favor tente mais tarde.";
       }
-      setLoading(false)
+      setLoading(false);
       setError = systemErrorMessage;
     }
   };
