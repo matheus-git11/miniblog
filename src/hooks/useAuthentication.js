@@ -75,7 +75,7 @@ export const useAuthentication = () => {
 
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       let systemErrorMessage;
 
@@ -83,12 +83,12 @@ export const useAuthentication = () => {
         systemErrorMessage = "Usuario nao encontrado";
       } else if (error.message.includes("wrong-password")) {
         systemErrorMessage = "Senha incorreta";
-      }else{
-        systemErrorMessage="Ocorreu um erro, por favor tente mais tarde."
+      } else {
+        systemErrorMessage = "Ocorreu um erro, por favor tente mais tarde.";
       }
-     
-      setError(systemErrorMessage)
-      setLoading(false)
+
+      setError(systemErrorMessage);
+      setLoading(false);
     }
   };
 
@@ -102,6 +102,6 @@ export const useAuthentication = () => {
     error,
     loading,
     logout,
-    login
+    login,
   };
 };
