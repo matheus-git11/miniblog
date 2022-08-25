@@ -10,15 +10,14 @@ const CreatePost = () => {
   const [body, setBody] = useState("");
   const [tags, setTags] = useState([]);
   const [formError, setFormError] = useState("");
-  const[loading,setLoading] = useState("")
-  const[error,setError]=useState("")
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
-    <div>
+    <div className={styles.create_post}>
       <h2>Criar post</h2>
       <p>Escreva sobre o que quiser e compartilhe o seu conhecimento!</p>
       <form onSubmit={handleSubmit}>
@@ -69,13 +68,7 @@ const CreatePost = () => {
           />
         </label>
 
-        {!loading && <button className="btn">Postar</button>}
-        {loading && (
-          <button className="btn" disabled>
-            Aguarde....
-          </button>
-        )}
-        {error && <p className="error">{error}</p>}
+        <button className="btn">Postar</button>
       </form>
     </div>
   );
