@@ -1,0 +1,48 @@
+.post_detail{
+    margin-bottom: 2em;
+    
+}
+
+.post_detail img{
+    max-width: 600px;
+}
+
+.post_detail h2{
+    margin-bottom: .4em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.post_detail .tags{
+    margin-bottom: 1.2em;
+    display: flex;
+}
+
+.tags p{
+    margin-right: .5em;
+}
+
+.tags span{
+    font-weight: bold;
+}
+
+
+.createdby{
+    font-style: italic;
+    color:#444;
+    font-size: .8em;
+    margin-bottom: 1em;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.btn{
+    background-color: transparent;
+    border-radius: 0;
+    color:#000;
+    border: 1px solid #000;
+    padding: 7px 30px;
+    display: flex;
+    justify-self: flex-start;
+    width: 1.6em;
+}
