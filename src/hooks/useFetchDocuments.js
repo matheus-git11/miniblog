@@ -25,19 +25,31 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
       const collectionRef = await collection(db, docCollection); // referencia da collection passando banco e a colecao
 
       try {
-        let q; 
+        let q;
         //busca
         //dashboard
 
-        // criando a busca de dados pela data de criacao mais recentes
-        q = await query(collectionRef, orderBy("createdAt", "desc"));
+        // se for passado uma condicao que filtra os posts , funcao de procura 
+        if (search) {
+          q = await query(
+            collectionRef,
+            where("tags", "array-contains", search),
+            orderBy("createdAt", "desc")
+          );
 
-        //mapear os dados caso algo seja alterado , atualizando
+          //funcao que puxa todos os posts 
+        } else {
+          q = await query(collectionRef, orderBy("createdAt", "desc"));
+        }
+
+        // criando a busca de dados pela data de criacao mais recentes
+
+        //mapear os dados caso algo seja alterado , atualizando baseado na variavel Q 
         await onSnapshot(q, (QuerySnapshot) => {
           setDocuments(
             QuerySnapshot.docs.map((doc) => ({
-              id: doc.id,    /// id
-              ...doc.data(),/// titulo ,imagem , body 
+              id: doc.id, /// id
+              ...doc.data(), /// titulo ,imagem , body
             }))
           );
         });
@@ -50,14 +62,13 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         setLoading(false);
       }
     }
-    loadData();// invocando a funcao
+    loadData(); // invocando a funcao
   }, [docCollection, search, uid, cancelled]);
-
 
   // tambem para lidar com o problema de memory leak junto com o cancelled
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
 
-  return {documents, loading, error};
+  return { documents, loading, error };
 };
