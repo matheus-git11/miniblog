@@ -29,22 +29,22 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         //busca
         //dashboard
 
-        // se for passado uma condicao que filtra os posts , funcao de procura 
+        // se for passado uma condicao que filtra os posts , funcao de procura
         if (search) {
           q = await query(
             collectionRef,
-            where("tags", "array-contains", search),
+            where("tagsArray", "array-contains", search),
             orderBy("createdAt", "desc")
           );
 
-          //funcao que puxa todos os posts 
+          //funcao que puxa todos os posts
         } else {
           q = await query(collectionRef, orderBy("createdAt", "desc"));
         }
 
         // criando a busca de dados pela data de criacao mais recentes
 
-        //mapear os dados caso algo seja alterado , atualizando baseado na variavel Q 
+        //mapear os dados caso algo seja alterado , atualizando baseado na variavel Q
         await onSnapshot(q, (QuerySnapshot) => {
           setDocuments(
             QuerySnapshot.docs.map((doc) => ({
