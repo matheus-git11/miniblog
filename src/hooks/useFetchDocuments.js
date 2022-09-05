@@ -33,10 +33,17 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         if (search) {
           q = await query(
             collectionRef,
-            where("tagsArray", "array-contains", search),
-            orderBy("createdAt", "desc")
+            where("tagsArray", "array-contains", search), // firebase necessita de criar um indice para isso
+            orderBy("createdAt", "desc")  // tagsArray matriz e createdAt decrescente
           );
 
+          //funcao que puxa os posts de um individuo
+        } else if (uid) {
+          q = await query(
+            collectionRef,
+            where("uid", "==", uid), //firebase necessita de criar um indice para isso
+            orderBy("createdAt", "desc") // uid crescente e createdAt decrescente
+          );
           //funcao que puxa todos os posts
         } else {
           q = await query(collectionRef, orderBy("createdAt", "desc"));
